@@ -20,9 +20,46 @@ class Channel:
         self.description = self.channel['items'][0]['snippet']['description']
         self.custom_url = self.channel['items'][0]['snippet']['customUrl']
         self.url = f'https://www.youtube.com/{self.custom_url}'
-        self.number_of_subscribers = self.channel['items'][0]['statistics']['subscriberCount']
-        self.video_count = self.channel['items'][0]['statistics']['videoCount']
-        self.total_views = self.channel['items'][0]['statistics']['viewCount']
+        self.number_of_subscribers = int(self.channel['items'][0]['statistics']['subscriberCount'])
+        self.video_count = int(self.channel['items'][0]['statistics']['videoCount'])
+        self.total_views = int(self.channel['items'][0]['statistics']['viewCount'])
+
+    def __str__(self):
+        """Метод выводит информацию о названии канала
+        и выводит ссылку на этот канал"""
+        return f'{self.title}({self.url})'
+
+    def __add__(self, other):
+        """Метод складывает количество подписчиков"""
+        return self.number_of_subscribers + other.number_of_subscribers
+
+    def __sub__(self, other):
+        """Метод вычитает количество подписчиков"""
+        return self.number_of_subscribers - other.number_of_subscribers
+
+    def __lt__(self, other):
+        """Метод сравнивает меньше ли первый канал
+        по подписчикам чем второй канал"""
+        return self.number_of_subscribers < other.number_of_subscribers
+
+    def __le__(self, other):
+        """Метод сравнивает меньше или равно количество
+        подписчиков первого канала по сравнению со вторым"""
+        return self.number_of_subscribers <= other.number_of_subscribers
+
+    def __gt__(self, other):
+        """Метод сравнивает больше ли первый канал
+        по подписчикам чем второй канал"""
+        return self.number_of_subscribers > other.number_of_subscribers
+
+    def __ge__(self, other):
+        """Метод сравнивает больше или равно количество
+        подписчиков первого канала по сравнению со вторым"""
+        return self.number_of_subscribers >= other.number_of_subscribers
+
+    def __eq__(self, other):
+        """Метод сравнивает равно ли количество подписчиков двух каналов"""
+        return self.number_of_subscribers == other.number_of_subscribers
 
     @classmethod
     def get_service(cls):
