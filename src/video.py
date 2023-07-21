@@ -12,3 +12,13 @@ class Video(MixinAPI):
         self.url = f'https://youtu.be/{self.__video_id}'
         self.video_count = int(self.video['items'][0]['statistics']['viewCount'])
         self.video_likes = int(self.video['items'][0]['statistics']['likeCount'])
+
+    def __str__(self):
+        """Метод возвращает заголовок видео"""
+        return f'{self.title_video}'
+
+
+class PLVideo(Video):
+    def __init__(self, video_id, playlist_id):
+        super().__init__(video_id)
+        self.playlist_id = playlist_id

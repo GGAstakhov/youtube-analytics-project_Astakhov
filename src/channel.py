@@ -1,10 +1,12 @@
 import json
+import os
 
 from src.mixinapi import MixinAPI
 
 
 class Channel(MixinAPI):
     """Класс для ютуб-канала"""
+    api_key: str = os.getenv('YOUTUBE_API_KEY')
 
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
