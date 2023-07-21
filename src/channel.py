@@ -1,17 +1,15 @@
 import json
-import os
 
-from googleapiclient.discovery import build
+from src.mixinapi import MixinAPI
 
 
-class Channel:
+class Channel(MixinAPI):
     """Класс для ютуб-канала"""
-    api_key: str = os.getenv('YOUTUBE_API_KEY')
 
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
-        self.channel_id = channel_id
-        self.channel = Channel.get_service().channels().list(
+        self.__channel_id = channel_id
+        self.channel = self.get_service().channels().list(
             id=channel_id, part='snippet,statistics'
         ).execute()
 
@@ -61,6 +59,10 @@ class Channel:
         """Метод сравнивает равно ли количество подписчиков двух каналов"""
         return self.number_of_subscribers == other.number_of_subscribers
 
+    @property
+    def channel_id(self):
+        """Декоратор позволяет обращаться к ID как к аргументу"""
+        return self.__channel_id
 
     def to_json(self, path):
         my_data = {
