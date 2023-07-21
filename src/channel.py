@@ -61,9 +61,6 @@ class Channel:
         """Метод сравнивает равно ли количество подписчиков двух каналов"""
         return self.number_of_subscribers == other.number_of_subscribers
 
-    @classmethod
-    def get_service(cls):
-        return build('youtube', 'v3', developerKey=cls.api_key)
 
     def to_json(self, path):
         my_data = {
