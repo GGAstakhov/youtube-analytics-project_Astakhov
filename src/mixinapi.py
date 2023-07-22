@@ -3,8 +3,8 @@ from googleapiclient.discovery import build
 
 
 class MixinAPI:
-    """Миксин класс для использования функции
-    get_service во всех дочерних классах"""
+    """РњРёРєСЃРёРЅ РєР»Р°СЃСЃ РґР»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С„СѓРЅРєС†РёРё
+    get_service РІРѕ РІСЃРµС… РґРѕС‡РµСЂРЅРёС… РєР»Р°СЃСЃР°С…"""
     api_key: str = os.getenv('YOUTUBE_API_KEY')
 
     @classmethod
