@@ -4,7 +4,7 @@ from src.mixinapi import MixinAPI
 class Video(MixinAPI):
     def __init__(self, video_id):
         self.__video_id = video_id
-        self.video = self.get_service().channels().list(
+        self.video = self.get_service().videos().list(
             id=video_id, part='snippet,statistics'
         ).execute()
         self.id = self.video['items'][0]['id']
