@@ -21,8 +21,8 @@ class Video(MixinAPI):
             self.like_count = int(self.video['items'][0]['statistics']['likeCount'])
 
     def __str__(self):
-        # """Метод возвращает заголовок видео"""
         return f'{self.title}'
+
 
 
 class PLVideo(Video):
