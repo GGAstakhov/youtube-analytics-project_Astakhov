@@ -8,14 +8,21 @@ class Video(MixinAPI):
             id=video_id, part='snippet,statistics'
         ).execute()
         self.id = self.video['items'][0]['id']
-        self.title_video = self.video['items'][0]['snippet']['title']
-        self.url = f'https://youtu.be/{self.__video_id}'
-        self.video_count = int(self.video['items'][0]['statistics']['viewCount'])
-        self.video_likes = int(self.video['items'][0]['statistics']['likeCount'])
+        try:
+            self.title = self.video['items'][0]['snippet']['title']
+        except IndexError:
+            self.title = None
+            self.url = None
+            self.video_count = None
+            self.like_count = None
+        else:
+            self.url = f'https://youtu.be/{self.__video_id}'
+            self.video_count = int(self.video['items'][0]['statistics']['viewCount'])
+            self.like_count = int(self.video['items'][0]['statistics']['likeCount'])
 
     def __str__(self):
-        """Метод возвращает заголовок видео"""
-        return f'{self.title_video}'
+        # """Метод возвращает заголовок видео"""
+        return f'{self.title}'
 
 
 class PLVideo(Video):
